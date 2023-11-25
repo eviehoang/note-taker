@@ -2,8 +2,9 @@ const fs = require('fs')
 const path = require('path')
 const express = require('express')
 const app = express()
-const PORT = process.env.PORT || 3000
 const db = require('./db/db.json')
+
+const PORT = process.env.PORT || 3001
 
 //Allows all notes to have a unique ID
 const { v4: uuidv4 } = require('uuid');
