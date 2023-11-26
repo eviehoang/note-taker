@@ -59,4 +59,5 @@ Heroku: [Heroku](https://evie-note-taker-071f3e8ace6d.herokuapp.com/)
 * [GitHub Pages](https://pages.github.com)
 * [W3School](https://w3schools.com/graphics/svg_rect.asp) for tutorial codes and educational references.
 * [MDN](https://developer.mozilla.org/en-US/) for example codes and educational references.
-* [Source Code provided by BCS Team](https://github.com/coding-boot-camp/fantastic-umbrella)
+* [Source Code provided by BCS Team](https://github.com/coding-boot-camp/miniature-eureka)
+* Thank you to Josh and Cphiri for help with debugging.
