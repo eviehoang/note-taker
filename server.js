@@ -24,14 +24,22 @@ app.get("/notes", function (req, res) {
 //API Routes
 // GET /api/notes should read the db.json file and return all saved notes as JSON.
 app.get("/api/notes", (req, res) => {
-  fs.readFile("./db/db.json", (err, data) => {
-    ///error logging
-    if (err) throw err;
-    let dbData = JSON.parse(data);
-    //Returns new database
-    res.json(dbData);
+    fs.readFile("./db/db.json", (err, data) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send("Internal Server Error");
+        return;
+      }
+  
+      try {
+        let dbData = JSON.parse(data);
+        res.json(dbData);
+      } catch (parseError) {
+        console.error(parseError);
+        res.status(500).send("Error parsing JSON data");
+      }
+    });
   });
-});
 
 //POST
 ///api/notes receives a new note to save on the request body and add it to db.json, then returns new note to the client.
@@ -48,18 +56,30 @@ app.post("/api/notes", (req, res) => {
   res.json(db);
 });
 
-
 //DELETE
-// notes when the button is clicked by removing the note from db.json, saving and showing the updated database on the front end.
-app.delete("/api/notes/:id", (req, res) => {
-  const newDb = db.filter((note) => note.id !== req.params.id);
-  // update the db.json file to reflect the modified notes array
-  fs.writeFileSync("./db/db.json", JSON.stringify(newDb));
-  // send that removed note object back to user
-  readFile.json(newDb);
-});
-
-
+app.delete('/api/notes/:id', (req, res) => {
+    // Convert req.params.id to the same type as the id in your database
+    const idToDelete = req.params.id;
+  
+    // Filter out the note with the specified id
+    const newDb = db.filter((note) => note.id !== idToDelete);
+  
+    // Update the db.json file asynchronously
+    fs.writeFile('./db/db.json', JSON.stringify(newDb), (err) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send('Error deleting note.');
+      } else {
+        // Update the in-memory db variable
+        db.length = 0; // Clear the array
+        db.push(...newDb); // Push the updated notes back into the array
+  
+        // Send the updated notes array back to the client
+        res.header('Cache-Control', 'no-store'); // Disable caching
+        res.json(newDb);
+      }
+    });
+  });
 
 //App listens with front end on this port
 app.listen(PORT, () => console.log(`App listening on ${PORT}`));
