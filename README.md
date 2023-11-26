@@ -48,7 +48,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 Nhi Hoang - [linkedin](https://www.linkedin.com/in/ynhihoang/)
 Project Repo: [https://github.com/eviehoang/tech-blog](https://github.com/eviehoang/note-taker/)
-Heroku: [Heroku](https://drive.google.com/file/d/1BPCKPcyW4kZPRhm6XN-Nm-7PJ3nN-Lub/view?usp=sharing)
+Heroku: [Heroku](https://evie-note-taker-071f3e8ace6d.herokuapp.com/)
 
 
 <!-- ACKNOWLEDGMENTS -->
